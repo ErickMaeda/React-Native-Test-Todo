@@ -4,7 +4,8 @@ import {
     BackHandler,
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    Alert
 }                                           from 'react-native';
 import CustomComponents                     from 'react-native-deprecated-custom-components';
 import globals                              from '../../utils/globals'
@@ -67,7 +68,8 @@ export default class TaskDetailComponent extends Component {
         );
     }
     onPressSave(){
-        if(this.state.task.title.trim !== "" && this.state.task.description.trim !== ""){
+        if((this.state.task.title && this.state.task.title.trim() !== "") &&
+            (this.state.task.description && this.state.task.description.trim() !== "")) {
             if(this.props.route.key){
                 FIREBASEAPP.database().ref("tasks/" + this.props.route.key).update(this.state.task)
             }else{
